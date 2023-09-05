@@ -11,47 +11,31 @@ Quanti millisecondi mi separano da domani alle 9:30?
 Esiste un oggetto JS in grado di gestire le date?
 Esistono dei metodi per trasformare una data in millisecondi? */
 
-/*
-1 = 24 ore
-24 ore = (60 min * 24 ore) = 1440 min
-1440 min = (60 sec * 1440 min) = 86400 sec
-86400 sec = (86400 sec * 1000 msec) = 86.000.000 msec
 
-18 ore
-24 : 86.000.000 = 18 : x
-x = 18 * 86.000.000 / 24 = 64.500.000 msec 
+// imposto data limite
+const dateLimit = new Date("September 6, 2023 09:30:00");
 
-*/
+function reverseCount() {
 
-// seleziono elemento DOM
-const h1Element = document.querySelector('h1');
+    // imposto attuale
+    let dateNow = new Date().getTime();
 
-let dateLimit = new Date("sep 06, 2023 09:30:00").getTime();
-
-console.log(dateLimit);
-
-let dateNow = new Date().getTime();
-
-console.log(dateNow);
-
-/**
- * 
- * @param {number} now actual date
- * @param {number} limit time limit
- */
-function result (limit, now) {
-    const detrazione = limit - now;
-    console.log(detrazione);
-    h1Element.innerHTML = detrazione
+    // sottraggo al limite l'attuale
+    let result = Math.floor((dateLimit - dateNow) / 1000);
     
+    // seleziono elemento DOM
+    document.querySelector('h1').innerHTML = `Rimangono 👉 ${result} 👈 secondi al ${dateLimit}`;
+    
+    
+    if (result == 0) {
+
+        // stampo in pagina la sveglia
+        document.querySelector('h1').innerHTML = '⏰';
+        
+        // imposto termine della timing function
+        clearInterval(counter)
+    }
 }
 
-result(dateLimit, dateNow);
-
-/* setInterval(result, 2000) */
-
-
-
-/* setInterval(result, 1000); */
-
+let counter = setInterval(reverseCount, 1000);
 
