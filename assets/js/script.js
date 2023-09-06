@@ -27,7 +27,7 @@ function reverseCount() {
     document.querySelector('h1').innerHTML = `Rimangono 👉 ${result} 👈 secondi al ${dateLimit}`;
     
     
-    if (result == 0) {
+    if (result < 0) {
 
         // stampo in pagina la sveglia
         document.querySelector('h1').innerHTML = '⏰';
